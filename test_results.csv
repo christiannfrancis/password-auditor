@@ -1,0 +1,11 @@
+sample_password,expected_passes,actual_passes
+abc,1,
+ABC,1,
+123456,1,
+!!!!!!!!!!!!,2,
+abcdefghijkl,2,
+Abcdefghijkl,3,
+Abcdefghijk1,4,
+Abcdefghij1!,5,
+Abc1!,4,
+Password123!,5,
