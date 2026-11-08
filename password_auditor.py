@@ -1,3 +1,25 @@
+def is_common_password(password):
+    with open("common_passwords.txt", "r") as file:
+        for line in file:
+            if password.lower() == line.strip().lower():
+                return True
+    return False
+
+
+def has_repeated_pattern(password):
+    for i in range(len(password) - 2):
+        if password[i] == password[i + 1] == password[i + 2]:
+            return True
+
+    for size in range(1, len(password) // 2 + 1):
+        pattern = password[:size]
+        repeats = len(password) // size
+
+        if pattern * repeats == password:
+            return True
+
+    return False
+
 def check_password(password):
     has_upper = False
     has_lower = False
@@ -33,6 +55,12 @@ def check_password(password):
             print(requirement + ": FAIL")
 
     print("\nChecks passed:", passed, "out of", len(checks))
+
+    if is_common_password(password):
+        print("Warning: This is a common password.")
+
+    if has_repeated_pattern(password):
+        print("Warning: This password contains a repeated pattern.")
 
 
 def main():
