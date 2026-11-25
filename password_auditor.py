@@ -172,6 +172,24 @@ def check_password(password, common_passwords, dictionary_words):
     if not warnings:
         print("No matches found by the current pattern checks.")
 
+    # Use the checks and warnings to rate the password.
+    if result["common"] or result["decorated_common"] or result["passed"] <= 2:
+        strength = "Weak"
+    elif result["passed"] == 5 and not warnings:
+        strength = "Strong"
+    else:
+        strength = "Moderate"
+
+    print("\nPassword strength:", strength)
+
+    if result["common"] or result["decorated_common"]:
+        print("Suggestion: Choose a different password.")
+    elif warnings:
+        print("Suggestion: Replace the words or patterns flagged above.")
+
+    if result["passed"] < 5:
+        print("Suggestion: Look at the checks marked FAIL above.")
+
     if result["entropy"] is None:
         print("Entropy estimate unavailable for these characters.")
     else:
